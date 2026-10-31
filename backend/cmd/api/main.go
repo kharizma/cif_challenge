@@ -66,8 +66,10 @@ func main() {
 	api.POST("/cif/check", cifHandler.Check)
 	api.GET("/cif", cifHandler.List)
 	api.GET("/cif/:application_id", cifHandler.Get)
-	api.POST("/uploads", uploadHandler.Create)
-	api.GET("/uploads/:upload_id", uploadHandler.Get)
+	uploads := api.Group("/uploads")
+	uploads.Use(uploadHandler.RequireApplicationHeader)
+	uploads.POST("", uploadHandler.Create)
+	uploads.GET("/:upload_id", uploadHandler.Get)
 
 	addr := ":" + cfg.Get("PORT", "8080")
 	slog.Info("api listening", "addr", addr, "cache_ttl", ttl.String())

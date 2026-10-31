@@ -20,7 +20,10 @@ import (
 	"cif-backend/internal/repository"
 )
 
-const maxUploadSize = 20 << 20
+const (
+	maxUploadSize    = 20 << 20
+	applicationIDKey = "application_id"
+)
 
 var allowedFileTypes = map[string]bool{"jpg": true, "jpeg": true, "png": true, "pdf": true}
 var allowedDocTypes = map[string]bool{"KTP": true, "NPWP": true, "SLIP_GAJI": true, "BUKU_NIKAH": true, "LAINNYA": true}
@@ -61,19 +64,7 @@ func (h *UploadHandler) Create(c *gin.Context) {
 		return
 	}
 
-	applicationID := strings.TrimSpace(c.PostForm("application_id"))
-	if applicationID != "" {
-		exists, err := h.customers.Exists(c.Request.Context(), applicationID)
-		if err != nil {
-			slog.Error("check application failed", "error", err)
-			httpx.Fail(c, http.StatusInternalServerError, "Terjadi kesalahan internal.", nil)
-			return
-		}
-		if !exists {
-			httpx.Fail(c, http.StatusNotFound, "Pengajuan tidak ditemukan.", nil)
-			return
-		}
-	}
+	applicationID := c.GetString(applicationIDKey)
 
 	id, err := newID()
 	if err != nil {
@@ -131,6 +122,30 @@ func (h *UploadHandler) Create(c *gin.Context) {
 	})
 }
 
+// RequireApplicationHeader rejects requests without a valid X-Application-Id header.
+func (h *UploadHandler) RequireApplicationHeader(c *gin.Context) {
+	applicationID := strings.TrimSpace(c.GetHeader("X-Application-Id"))
+	if applicationID == "" {
+		httpx.Fail(c, http.StatusUnauthorized, "Header X-Application-Id wajib diisi.", nil)
+		c.Abort()
+		return
+	}
+	exists, err := h.customers.Exists(c.Request.Context(), applicationID)
+	if err != nil {
+		slog.Error("check application failed", "error", err)
+		httpx.Fail(c, http.StatusInternalServerError, "Terjadi kesalahan internal.", nil)
+		c.Abort()
+		return
+	}
+	if !exists {
+		httpx.Fail(c, http.StatusNotFound, "Pengajuan tidak ditemukan.", nil)
+		c.Abort()
+		return
+	}
+	c.Set(applicationIDKey, applicationID)
+	c.Next()
+}
+
 // Get handles GET /api/uploads/:upload_id and serves the file inline.
 func (h *UploadHandler) Get(c *gin.Context) {
 	document, err := h.documents.FindByID(c.Request.Context(), c.Param("upload_id"))
@@ -141,6 +156,11 @@ func (h *UploadHandler) Get(c *gin.Context) {
 		}
 		slog.Error("get document failed", "error", err)
 		httpx.Fail(c, http.StatusInternalServerError, "Terjadi kesalahan internal.", nil)
+		return
+	}
+
+	if document.ApplicationID == nil || *document.ApplicationID != c.GetString(applicationIDKey) {
+		httpx.Fail(c, http.StatusNotFound, "File tidak ditemukan.", nil)
 		return
 	}
 
