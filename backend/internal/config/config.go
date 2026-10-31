@@ -64,3 +64,12 @@ func (c *Config) PostgresURL() string {
 	}
 	return u.String()
 }
+
+// LoadOptional returns a config backed only by the process environment when
+// the .env file is absent (containers receive settings as env vars).
+func LoadOptional(path string) *Config {
+	if cfg, err := Load(path); err == nil {
+		return cfg
+	}
+	return &Config{values: map[string]string{}}
+}
