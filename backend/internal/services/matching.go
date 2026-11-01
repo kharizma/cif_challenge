@@ -1,8 +1,10 @@
 package services
 
 import (
+	"log/slog"
 	"math"
 	"regexp"
+	"sort"
 	"strings"
 	"time"
 )
@@ -218,7 +220,7 @@ func Confidence(input MatchInput, candidate Candidate) float64 {
 		weighted += float64(weight) * score
 	}
 
-	add(30, nikScore(input.NIK, candidate.NIK))
+	add(35, nikScore(input.NIK, candidate.NIK))
 	add(25, nameScore(input.FullName, candidate.FullName))
 	add(15, dobScore(input.DOB, candidate.DOB))
 	if input.HasPhone {
@@ -233,14 +235,67 @@ func Confidence(input MatchInput, candidate Candidate) float64 {
 	return math.Round(weighted/weights*10000) / 100
 }
 
-// BestCandidate returns the highest-confidence candidate and its confidence.
+// minPhoneDistance returns the smallest Levenshtein distance to any candidate phone.
+func minPhoneDistance(input string, phones []Phone) int {
+	target := NormalizePhone(input)
+	best := -1
+	for _, phone := range phones {
+		distance := levenshtein(target, NormalizePhone(phone.Number))
+		if best < 0 || distance < best {
+			best = distance
+		}
+	}
+	return best
+}
+
+// EligibleCandidate reports whether a record may be scored for this input.
+// A record qualifies when its NIK is within edit distance 2, or a supplied
+// phone matches one of its phones within edit distance 1.
+func EligibleCandidate(input MatchInput, candidate Candidate) bool {
+	if levenshtein(NormalizeNIK(input.NIK), NormalizeNIK(candidate.NIK)) <= 2 {
+		return true
+	}
+	// A record with no phones cannot qualify on a phone match; minPhoneDistance is -1 there.
+	return input.HasPhone && len(candidate.Phones) > 0 && minPhoneDistance(input.Phone, candidate.Phones) <= 1
+}
+
+// candidatePool filters and keeps the five records with the smallest NIK distance.
+func candidatePool(input MatchInput, candidates []Candidate) []Candidate {
+	type ranked struct {
+		candidate Candidate
+		distance  int
+	}
+	pool := make([]ranked, 0, len(candidates))
+	for _, candidate := range candidates {
+		if !EligibleCandidate(input, candidate) {
+			continue
+		}
+		pool = append(pool, ranked{
+			candidate: candidate,
+			distance:  levenshtein(NormalizeNIK(input.NIK), NormalizeNIK(candidate.NIK)),
+		})
+	}
+	sort.SliceStable(pool, func(i, j int) bool { return pool[i].distance < pool[j].distance })
+	if len(pool) > 5 {
+		pool = pool[:5]
+	}
+	result := make([]Candidate, len(pool))
+	for i, item := range pool {
+		result[i] = item.candidate
+	}
+	return result
+}
+
+// BestCandidate returns the highest-confidence eligible candidate and its confidence.
 func BestCandidate(input MatchInput, candidates []Candidate) (*Candidate, float64) {
 	var best *Candidate
 	bestScore := -1.0
-	for i := range candidates {
-		score := Confidence(input, candidates[i])
+	for _, candidate := range candidatePool(input, candidates) {
+		slog.Info("candidate", "nik", candidate.NIK, "name", candidate.FullName)
+		score := Confidence(input, candidate)
 		if score > bestScore {
-			best, bestScore = &candidates[i], score
+			copied := candidate
+			best, bestScore = &copied, score
 		}
 	}
 	if best == nil {

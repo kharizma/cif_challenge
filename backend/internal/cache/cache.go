@@ -37,10 +37,20 @@ func New(addr, password string) Store {
 	client := redis.NewClient(&redis.Options{Addr: addr, Password: password})
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
-	if err := client.Ping(ctx).Err(); err != nil {
-		slog.Warn("redis unavailable, using in-memory cache", "addr", addr, "error", err)
+
+	pong, err := client.Ping(ctx).Result()
+	if err != nil {
+		slog.Warn(
+			"Redis unavailable, using in-memory cache",
+			"addr", addr,
+			"error", err,
+		)
+
+		_ = client.Close()
 		return newMemory()
 	}
+
+	slog.Info("Redis connected", "addr", addr, "response", pong)
 	return &Redis{client: client}
 }
 
