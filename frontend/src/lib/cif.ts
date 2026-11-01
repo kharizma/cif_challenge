@@ -1,4 +1,4 @@
-import type { CustomerFormErrors, CustomerFormValues } from '../types';
+import type { Customer, CustomerFormErrors, CustomerFormValues, DocumentRecord } from '../types';
 
 export {
   MARITAL_STATUSES as maritalStatusOptions,
@@ -118,3 +118,26 @@ export const DOCS_STYLES: Record<string, string> = {
   COMPLETE: 'bg-emerald-50 text-emerald-700',
   EMPTY: 'bg-neutral-100 text-neutral-600',
 };
+
+const DOC_MIME: Record<string, string> = {
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  png: 'image/png',
+  pdf: 'application/pdf',
+};
+
+// Maps backend documents to the upload UI record shape.
+export function documentRecords(customer: Customer): DocumentRecord[] {
+  return (customer.documents ?? []).map((doc) => ({
+    id: doc.id,
+    serverId: doc.id,
+    customerId: customer.id,
+    type: doc.doc_type,
+    fileName: doc.file_name,
+    mime: DOC_MIME[doc.file_type] ?? 'application/octet-stream',
+    size: doc.size,
+    uploadedBytes: doc.size,
+    status: 'success',
+    createdAt: doc.created_at,
+  }));
+}

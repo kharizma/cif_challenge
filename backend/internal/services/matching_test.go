@@ -79,7 +79,7 @@ func TestStatusFor(t *testing.T) {
 		status       string
 		reason       string
 	}{
-		{false, 0, 0, false, "NOT PASS", "NO_CANDIDATE"},
+		{false, 0, 0, false, "NOT PASS", "CIF_NOT_FOUND"},
 		{true, 69.99, 90, true, "NOT PASS", "LOW_IDENTITY_CONFIDENCE"},
 		{true, 95, 49, true, "NOT PASS", "LOW_CREDIT_SCORE"},
 		{true, 95, 0, false, "NOT PASS", "LOW_CREDIT_SCORE"},

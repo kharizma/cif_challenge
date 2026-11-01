@@ -47,6 +47,7 @@ func (r *CustomerRepository) List(ctx context.Context, page, limit int) ([]model
 	}
 	var customers []models.Customer
 	err := r.db.WithContext(ctx).
+		Preload("Documents").
 		Order("created_at DESC, id DESC").
 		Offset((page - 1) * limit).
 		Limit(limit).

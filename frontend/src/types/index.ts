@@ -38,8 +38,19 @@ export type Tenor = (typeof TENORS)[number];
 export type CustomerStatus = 'PASS' | 'NOT PASS' | 'REFER';
 export type DocsStatus = 'COMPLETE' | 'EMPTY';
 
+export interface CifDocument {
+  id: string;
+  application_id?: string;
+  file_name: string;
+  doc_type: DocumentType;
+  file_type: string;
+  size: number;
+  created_at: string;
+}
+
 export interface Customer {
   id: string;
+  applicationId?: string;
   fullName: string;
   nik: string;
   birthDate: string;
@@ -51,6 +62,12 @@ export interface Customer {
   status: CustomerStatus;
   docs: DocsStatus;
   createdAt: string;
+  decision?: string;
+  reason?: string;
+  identityConfidence?: number;
+  creditScore?: number;
+  matchedNoCif?: string;
+  documents?: CifDocument[];
 }
 
 export type CustomerFormValues = {
@@ -79,7 +96,31 @@ export interface DocumentRecord {
   mime: string;
   size: number;
   uploadedBytes: number;
+  serverId?: string;
   status: DocumentUploadStatus;
   error?: string;
   createdAt: string;
+}
+
+export interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  total_pages: number;
+}
+
+export interface CifCheckResult {
+  customer: Customer;
+  status: CustomerStatus;
+  decision?: string;
+  reason?: string;
+  identityConfidence?: number;
+  creditScore?: number;
+  matchedNoCif?: string;
+  scoring?: {
+    no_cif: string;
+    score: number;
+    grade: string;
+    reason_codes: string[];
+  } | null;
 }

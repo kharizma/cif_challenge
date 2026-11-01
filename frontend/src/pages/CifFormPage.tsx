@@ -1,60 +1,72 @@
-import { Eye, FileUp, Loader2, Pencil, Plus, Search, Trash2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Eye, FileUp, Loader2, Plus, Search } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import ConfirmDialog from '../components/cif/ConfirmDialog';
+import CifResultModal from '../components/cif/CifResultModal';
 import CustomerDetailModal from '../components/cif/CustomerDetailModal';
 import CustomerFormModal from '../components/cif/CustomerFormModal';
 import DocumentsModal from '../components/cif/DocumentsModal';
 import PageHeader from '../components/ui/PageHeader';
 import { EmptyState } from '../components/ui/States';
 import Toast from '../components/ui/Toast';
-import { initialCustomers } from '../data/customers';
 import {
   DOCS_STYLES,
   STATUS_STYLES,
+  documentRecords,
   formatDate,
   formatRupiah,
   maskNik,
 } from '../lib/cif';
-import {
-  DOC_STATUS_STYLES,
-  computeDocumentStatus,
-  loadDocumentMap,
-  saveDocumentMap,
-} from '../lib/docStore';
-import type { Customer, CustomerFormValues, DocumentRecord } from '../types';
+import { DOC_STATUS_STYLES, computeDocumentStatus } from '../lib/docStore';
+import { apiErrorMessage, checkCif, fetchCifList } from '../services/api';
+import type { CifCheckResult, Customer, CustomerFormValues, Pagination } from '../types';
 
 type ModalState =
   | { type: 'add' }
-  | { type: 'edit'; customer: Customer }
   | { type: 'view'; customer: Customer }
-  | { type: 'delete'; customer: Customer }
   | { type: 'documents'; customer: Customer }
   | null;
 
+const PAGE_SIZE = 10;
+
 export default function CifFormPage() {
-  const [customers, setCustomers] = useState<Customer[]>(initialCustomers);
+  const [customers, setCustomers] = useState<Customer[]>([]);
+  const [pagination, setPagination] = useState<Pagination>({
+    page: 1,
+    limit: PAGE_SIZE,
+    total: 0,
+    total_pages: 0,
+  });
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [applied, setApplied] = useState('');
   const [searching, setSearching] = useState(false);
   const [modal, setModal] = useState<ModalState>(null);
+  const [result, setResult] = useState<CifCheckResult | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
-  const [documents, setDocuments] = useState<Record<string, DocumentRecord[]>>(() => loadDocumentMap());
 
-  const handleDocumentsChange = useCallback((customerId: string, records: DocumentRecord[]) => {
-    setDocuments((prev) => {
-      const next = { ...prev, [customerId]: records };
-      saveDocumentMap(next);
-      return next;
-    });
+  const load = useCallback(async (page: number) => {
+    setLoading(true);
+    setLoadError(null);
+    try {
+      const response = await fetchCifList(page, PAGE_SIZE);
+      setCustomers(response.customers);
+      setPagination(response.pagination);
+    } catch (error) {
+      setLoadError(apiErrorMessage(error));
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const documentsStatus = (customer: Customer) =>
-    computeDocumentStatus(
-      customer.status,
-      (documents[customer.id] ?? []).filter((record) => record.status === 'success').length,
-    );
+  useEffect(() => {
+    void load(1);
+  }, [load]);
 
-  // shortcut: local dataset with 400ms simulated search; swap for API call when backend endpoint exists.
+  const documentsStatus = (customer: Customer) =>
+    computeDocumentStatus(customer.status, customer.documents?.length ?? 0);
+
   useEffect(() => {
     const term = query.trim();
     if (term.length < 3) {
@@ -80,38 +92,30 @@ export default function CifFormPage() {
     );
   }, [customers, applied]);
 
-  const closeModal = useCallback(() => setModal(null), []);
-
-  const handleSubmit = (values: CustomerFormValues) => {
-    const isEdit = modal?.type === 'edit';
-    const record: Customer = {
-      id: isEdit && modal.type === 'edit' ? modal.customer.id : crypto.randomUUID(),
-      fullName: values.fullName.trim(),
-      nik: values.nik.trim(),
-      birthDate: values.birthDate,
-      phone: values.phone.trim(),
-      maritalStatus: values.maritalStatus as Customer['maritalStatus'],
-      creditType: values.creditType as Customer['creditType'],
-      loanAmount: Number(values.loanAmount),
-      tenor: Number(values.tenor) as Customer['tenor'],
-      status: isEdit && modal.type === 'edit' ? modal.customer.status : 'REFER',
-      docs: isEdit && modal.type === 'edit' ? modal.customer.docs : 'EMPTY',
-      createdAt:
-        isEdit && modal.type === 'edit' ? modal.customer.createdAt : new Date().toISOString(),
-    };
-
-    setCustomers((list) =>
-      isEdit ? list.map((item) => (item.id === record.id ? record : item)) : [record, ...list],
-    );
+  const closeModal = useCallback(() => {
     setModal(null);
-    setToast(isEdit ? 'Customer berhasil diperbarui.' : 'Customer berhasil ditambahkan.');
+    setFormError(null);
+  }, []);
+
+  const handleSubmit = async (values: CustomerFormValues) => {
+    setSubmitting(true);
+    setFormError(null);
+    try {
+      const check = await checkCif(values);
+      setModal(null);
+      setResult(check);
+      setToast(`Pengajuan ${check.customer.applicationId ?? ''} ${check.status}.`);
+      await load(1);
+    } catch (error) {
+      setFormError(apiErrorMessage(error));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const handleDelete = () => {
-    if (modal?.type !== 'delete') return;
-    setCustomers((list) => list.filter((item) => item.id !== modal.customer.id));
+  const closeDocuments = () => {
     setModal(null);
-    setToast('Customer berhasil dihapus.');
+    void load(pagination.page);
   };
 
   return (
@@ -122,7 +126,10 @@ export default function CifFormPage() {
         action={
           <button
             type="button"
-            onClick={() => setModal({ type: 'add' })}
+            onClick={() => {
+              setFormError(null);
+              setModal({ type: 'add' });
+            }}
             className="inline-flex h-10 items-center gap-1.5 self-start rounded-lg bg-accent px-4 text-sm font-medium text-white transition-colors hover:bg-accent-dark"
           >
             <Plus size={16} />
@@ -160,8 +167,24 @@ export default function CifFormPage() {
           </div>
         </div>
 
-        {customers.length === 0 ? (
-          <EmptyState title="Belum ada customer" description="Tambahkan customer pertamamu." />
+        {loadError ? (
+          <div className="px-5 py-10 text-center">
+            <p className="text-sm text-red-600">{loadError}</p>
+            <button
+              type="button"
+              onClick={() => void load(pagination.page)}
+              className="mt-3 rounded-lg border border-neutral-200 px-3 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
+            >
+              Coba lagi
+            </button>
+          </div>
+        ) : loading ? (
+          <div className="flex items-center justify-center gap-2 px-5 py-12 text-sm text-neutral-500">
+            <Loader2 size={16} className="animate-spin" />
+            Memuat data pengajuan…
+          </div>
+        ) : customers.length === 0 ? (
+          <EmptyState title="Belum ada pengajuan" description="Tambahkan customer pertama." />
         ) : filtered.length === 0 ? (
           <EmptyState
             title={searching ? 'Mencari data' : 'Customer tidak ditemukan'}
@@ -190,7 +213,7 @@ export default function CifFormPage() {
                 {filtered.map((customer) => (
                   <tr key={customer.id} className="transition-colors hover:bg-neutral-50">
                     <td className="whitespace-nowrap px-2.5 py-3 font-mono text-xs text-neutral-700">
-                      {maskNik(customer.nik)}
+                      {customer.nik ? maskNik(customer.nik) : '-'}
                     </td>
                     <td className="whitespace-nowrap px-2.5 py-3 text-neutral-600">
                       {customer.phone || '-'}
@@ -254,22 +277,6 @@ export default function CifFormPage() {
                         >
                           <Eye size={15} />
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => setModal({ type: 'edit', customer })}
-                          aria-label={`Edit ${customer.fullName}`}
-                          className="grid h-8 w-8 place-items-center rounded-lg text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
-                        >
-                          <Pencil size={15} />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setModal({ type: 'delete', customer })}
-                          aria-label={`Hapus ${customer.fullName}`}
-                          className="grid h-8 w-8 place-items-center rounded-lg text-neutral-500 transition-colors hover:bg-red-50 hover:text-red-600"
-                        >
-                          <Trash2 size={15} />
-                        </button>
                       </div>
                     </td>
                   </tr>
@@ -278,13 +285,43 @@ export default function CifFormPage() {
             </table>
           </div>
         )}
+
+        {!loading && !loadError && customers.length > 0 && (
+          <div className="flex items-center justify-between border-t border-neutral-200 px-5 py-3 text-sm text-neutral-600">
+            <span>
+              Halaman {pagination.page} dari {Math.max(pagination.total_pages, 1)} · {pagination.total} pengajuan
+            </span>
+            <div className="flex gap-1">
+              <button
+                type="button"
+                onClick={() => void load(pagination.page - 1)}
+                disabled={pagination.page <= 1}
+                className="inline-flex h-8 items-center gap-1 rounded-lg border border-neutral-200 px-3 text-xs font-medium hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <ChevronLeft size={14} />
+                Prev
+              </button>
+              <button
+                type="button"
+                onClick={() => void load(pagination.page + 1)}
+                disabled={pagination.page >= pagination.total_pages}
+                className="inline-flex h-8 items-center gap-1 rounded-lg border border-neutral-200 px-3 text-xs font-medium hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Next
+                <ChevronRight size={14} />
+              </button>
+            </div>
+          </div>
+        )}
       </section>
 
-      {(modal?.type === 'add' || modal?.type === 'edit') && (
+      {modal?.type === 'add' && (
         <CustomerFormModal
-          customer={modal.type === 'edit' ? modal.customer : null}
+          customer={null}
           onClose={closeModal}
           onSubmit={handleSubmit}
+          busy={submitting}
+          error={formError}
         />
       )}
       {modal?.type === 'view' && (
@@ -293,18 +330,18 @@ export default function CifFormPage() {
       {modal?.type === 'documents' && (
         <DocumentsModal
           customer={modal.customer}
-          records={documents[modal.customer.id] ?? []}
-          onChange={(records) => handleDocumentsChange(modal.customer.id, records)}
-          onClose={closeModal}
+          records={documentRecords(modal.customer)}
+          onClose={closeDocuments}
         />
       )}
-      {modal?.type === 'delete' && (
-        <ConfirmDialog
-          title="Hapus customer"
-          message={`Data ${modal.customer.fullName} akan dihapus permanen. Lanjutkan?`}
-          confirmLabel="Hapus"
-          onConfirm={handleDelete}
-          onClose={closeModal}
+      {result && (
+        <CifResultModal
+          result={result}
+          onClose={() => setResult(null)}
+          onUpload={() => {
+            setModal({ type: 'documents', customer: result.customer });
+            setResult(null);
+          }}
         />
       )}
       {toast && <Toast message={toast} onClose={() => setToast(null)} />}

@@ -11,11 +11,9 @@ import {
   getBlob,
   saveBlob,
 } from '../../lib/docStore';
+import { apiErrorMessage, fetchUploadBlob, uploadCifDocument } from '../../services/api';
 import { DOCUMENT_TYPES } from '../../types';
 import type { Customer, DocumentRecord, DocumentType } from '../../types';
-
-const CHUNK_SIZE = 512 * 1024;
-const CHUNK_DELAY_MS = 150;
 
 const STATUS_LABEL: Record<DocumentRecord['status'], string> = {
   waiting: 'Menunggu',
@@ -31,16 +29,13 @@ const STATUS_STYLE: Record<DocumentRecord['status'], string> = {
   failed: 'bg-red-50 text-red-700',
 };
 
-const sleep = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms));
-
 interface DocumentsModalProps {
   customer: Customer;
   records: DocumentRecord[];
-  onChange: (records: DocumentRecord[]) => void;
   onClose: () => void;
 }
 
-export default function DocumentsModal({ customer, records, onChange, onClose }: DocumentsModalProps) {
+export default function DocumentsModal({ customer, records, onClose }: DocumentsModalProps) {
   const [queue, setQueue] = useState<DocumentRecord[]>(() =>
     records.map((record) =>
       record.status === 'uploading' ? { ...record, status: 'waiting' as const } : record,
@@ -54,15 +49,9 @@ export default function DocumentsModal({ customer, records, onChange, onClose }:
 
   const active = useRef<Set<string>>(new Set());
   const queueRef = useRef(queue);
-  const onChangeRef = useRef(onChange);
-
-  useEffect(() => {
-    onChangeRef.current = onChange;
-  }, [onChange]);
 
   useEffect(() => {
     queueRef.current = queue;
-    onChangeRef.current(queue);
   }, [queue]);
 
   const pump = useCallback(() => {
@@ -74,6 +63,14 @@ export default function DocumentsModal({ customer, records, onChange, onClose }:
       .forEach((record) => void upload(record));
   }, []);
 
+  async function blobFor(record: DocumentRecord): Promise<Blob | null> {
+    if (record.serverId) {
+      if (!customer.applicationId) throw new Error('Application ID tidak tersedia.');
+      return fetchUploadBlob(customer.applicationId, record.serverId);
+    }
+    return getBlob(record.id);
+  }
+
   async function upload(record: DocumentRecord) {
     active.current.add(record.id);
     setQueue((list) =>
@@ -83,26 +80,36 @@ export default function DocumentsModal({ customer, records, onChange, onClose }:
     );
 
     try {
+      if (!customer.applicationId) throw new Error('Application ID tidak tersedia.');
       const blob = await getBlob(record.id);
       if (!blob) throw new Error('File tidak tersedia. Pilih ulang file ini.');
 
-      let uploaded = Math.min(record.uploadedBytes, record.size);
-      while (uploaded < record.size) {
-        await sleep(CHUNK_DELAY_MS);
-        uploaded = Math.min(record.size, uploaded + CHUNK_SIZE);
-        const done = uploaded >= record.size;
-        setQueue((list) =>
-          list.map((item) =>
-            item.id === record.id
-              ? { ...item, uploadedBytes: uploaded, status: done ? 'success' : 'uploading' }
-              : item,
-          ),
-        );
-      }
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Upload gagal.';
+      const uploaded = await uploadCifDocument(
+        customer.applicationId,
+        record.type,
+        blob,
+        record.fileName,
+      );
       setQueue((list) =>
-        list.map((item) => (item.id === record.id ? { ...item, status: 'failed', error: message } : item)),
+        list.map((item) =>
+          item.id === record.id
+            ? {
+                ...item,
+                serverId: uploaded.id,
+                uploadedBytes: record.size,
+                status: 'success',
+                error: undefined,
+              }
+            : item,
+        ),
+      );
+    } catch (error) {
+      setQueue((list) =>
+        list.map((item) =>
+          item.id === record.id
+            ? { ...item, status: 'failed', error: apiErrorMessage(error) }
+            : item,
+        ),
       );
     } finally {
       active.current.delete(record.id);
@@ -120,7 +127,7 @@ export default function DocumentsModal({ customer, records, onChange, onClose }:
     void Promise.all(
       images.map(async (record) => {
         if (thumbs[record.id]) return null;
-        const blob = await getBlob(record.id);
+        const blob = await blobFor(record);
         return blob ? ([record.id, URL.createObjectURL(blob)] as const) : null;
       }),
     ).then((entries) => {
@@ -195,12 +202,16 @@ export default function DocumentsModal({ customer, records, onChange, onClose }:
   };
 
   const openPreview = async (record: DocumentRecord) => {
-    const blob = await getBlob(record.id);
-    if (!blob) {
-      setFormError('File tidak ditemukan di perangkat ini.');
-      return;
+    try {
+      const blob = await blobFor(record);
+      if (!blob) {
+        setFormError('File tidak ditemukan.');
+        return;
+      }
+      setPreview({ url: URL.createObjectURL(blob), name: record.fileName, mime: record.mime });
+    } catch (error) {
+      setFormError(apiErrorMessage(error));
     }
-    setPreview({ url: URL.createObjectURL(blob), name: record.fileName, mime: record.mime });
   };
 
   const closePreview = () => {

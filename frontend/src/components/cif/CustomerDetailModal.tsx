@@ -1,4 +1,4 @@
-import { formatDate, formatRupiah } from '../../lib/cif';
+import { formatDate, formatRupiah, maskNik } from '../../lib/cif';
 import type { ReactNode } from 'react';
 import type { Customer } from '../../types';
 import Modal from '../ui/Modal';
@@ -26,8 +26,9 @@ export default function CustomerDetailModal({ customer, onClose }: { customer: C
     <Modal title="Customer Detail" description={customer.fullName} onClose={onClose}>
       <div className="space-y-5">
         <Section title="Personal Information">
+          <Row label="Application ID" value={customer.applicationId ?? '-'} />
           <Row label="Nama Lengkap" value={customer.fullName} />
-          <Row label="NIK" value={customer.nik} />
+          <Row label="NIK" value={customer.nik ? maskNik(customer.nik) : '-'} />
           <Row label="Tanggal Lahir" value={customer.birthDate} />
         </Section>
         <Section title="Contact Information">
@@ -40,6 +41,10 @@ export default function CustomerDetailModal({ customer, onClose }: { customer: C
           <Row label="Tenor" value={`${customer.tenor} bulan`} />
           <Row label="Created At" value={formatDate(customer.createdAt)} />
           <Row label="Status" value={customer.status} />
+          <Row label="Reason" value={customer.reason ?? '-'} />
+          <Row label="Identity Confidence" value={`${customer.identityConfidence ?? 0}%`} />
+          <Row label="Credit Score" value={customer.creditScore == null ? '-' : String(customer.creditScore)} />
+          <Row label="NO CIF" value={customer.matchedNoCif ?? '-'} />
           <Row label="Docs" value={customer.docs} />
         </Section>
       </div>

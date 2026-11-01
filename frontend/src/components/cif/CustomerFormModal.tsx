@@ -1,3 +1,4 @@
+import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import Field, { inputClass } from '../ui/Field';
@@ -16,6 +17,8 @@ interface CustomerFormModalProps {
   customer: Customer | null;
   onClose: () => void;
   onSubmit: (values: CustomerFormValues) => void;
+  busy?: boolean;
+  error?: string | null;
 }
 
 function toFormValues(customer: Customer | null): CustomerFormValues {
@@ -32,7 +35,13 @@ function toFormValues(customer: Customer | null): CustomerFormValues {
   };
 }
 
-export default function CustomerFormModal({ customer, onClose, onSubmit }: CustomerFormModalProps) {
+export default function CustomerFormModal({
+  customer,
+  onClose,
+  onSubmit,
+  busy = false,
+  error = null,
+}: CustomerFormModalProps) {
   const [values, setValues] = useState<CustomerFormValues>(() => toFormValues(customer));
   const [errors, setErrors] = useState<CustomerFormErrors>({});
   const [submitted, setSubmitted] = useState(false);
@@ -57,16 +66,19 @@ export default function CustomerFormModal({ customer, onClose, onSubmit }: Custo
       <button
         type="button"
         onClick={onClose}
-        className="h-10 rounded-lg border border-neutral-200 px-4 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-50"
+        disabled={busy}
+        className="h-10 rounded-lg border border-neutral-200 px-4 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-60"
       >
         Batal
       </button>
       <button
         type="submit"
         form="customer-form"
-        className="h-10 rounded-lg bg-accent px-4 text-sm font-medium text-white transition-colors hover:bg-accent-dark"
+        disabled={busy}
+        className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-accent px-4 text-sm font-medium text-white transition-colors hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Simpan
+        {busy && <Loader2 size={15} className="animate-spin" />}
+        {busy ? 'Memproses…' : 'Simpan'}
       </button>
     </div>
   );
@@ -80,6 +92,11 @@ export default function CustomerFormModal({ customer, onClose, onSubmit }: Custo
       onClose={onClose}
       footer={footer}
     >
+      {error && (
+        <p className="mb-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+          {error}
+        </p>
+      )}
       <form id="customer-form" onSubmit={handleSubmit} noValidate className="space-y-6">
         <fieldset className="space-y-4">
           <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-neutral-500">

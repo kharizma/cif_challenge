@@ -104,7 +104,7 @@ func (in *CheckInput) Validate(today time.Time) error {
 func StatusFor(hasCandidate bool, confidence, score float64, hasScore bool) (status, reason string) {
 	switch {
 	case !hasCandidate:
-		return "NOT PASS", "NO_CANDIDATE"
+		return "NOT PASS", "CIF_NOT_FOUND"
 	case confidence < 70:
 		return "NOT PASS", "LOW_IDENTITY_CONFIDENCE"
 	case !hasScore || score < 50:
