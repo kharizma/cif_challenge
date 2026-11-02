@@ -1,0 +1,1642 @@
+[
+  {
+    "NO_CIF": "8100000001",
+    "nik": "3171011504900001",
+    "full_name": "Budi Santoso",
+    "dob": "1990-04-15",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Siti Aminah",
+    "phones": [
+      {
+        "number": "6281234567890",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000002",
+    "nik": "3171015508920002",
+    "full_name": "Siti Aminah",
+    "dob": "1992-08-15",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Budi Santoso",
+    "phones": [
+      {
+        "number": "6281298765432",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000003",
+    "nik": "3273022002880003",
+    "full_name": "Andi Pratama",
+    "dob": "1988-02-20",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6285711112222",
+        "status": "ACTIVE"
+      },
+      {
+        "number": "6285711112223",
+        "status": "INACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000004",
+    "nik": "3578016107950004",
+    "full_name": "Hj. Dewi Lestari, S.E.",
+    "dob": "1995-07-21",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Rahmat Hidayat",
+    "phones": [
+      {
+        "number": "6287855554444",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000005",
+    "nik": "3171011504900002",
+    "full_name": "Hendra Gunawan",
+    "dob": "1990-04-15",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Maya Sari",
+    "phones": [
+      {
+        "number": "6281234567891",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": [
+      "BLACKLIST"
+    ]
+  },
+  {
+    "NO_CIF": "8100000006",
+    "nik": "3201014203850006",
+    "full_name": "Rina Marlina",
+    "dob": "1985-03-02",
+    "gender": "P",
+    "marital_status": "CERAI",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6281311110000",
+        "status": "INACTIVE"
+      }
+    ],
+    "flags": [
+      "DECEASED"
+    ]
+  },
+  {
+    "NO_CIF": "8100000007",
+    "nik": "3171011504900011",
+    "full_name": "Budi Santosa",
+    "dob": "1990-04-15",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Sri Wahyuni",
+    "phones": [
+      {
+        "number": "6281234500001",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000008",
+    "nik": "3171011504900007",
+    "full_name": "Budi Susanto",
+    "dob": "1990-04-15",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6281234500002",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000009",
+    "nik": "3273010311848280",
+    "full_name": "Budi Santoso",
+    "dob": "1984-11-03",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Ratna Sari",
+    "phones": [
+      {
+        "number": "6281399887766",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000010",
+    "nik": "3578022701999864",
+    "full_name": "Budi Santoso",
+    "dob": "1999-01-27",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289612345678",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000011",
+    "nik": "3172011006930101",
+    "full_name": "Muhammad Rizky Saputra",
+    "dob": "1993-06-10",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Nur Aisyah",
+    "phones": [
+      {
+        "number": "6282112340001",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000012",
+    "nik": "3172011006930107",
+    "full_name": "Muhamad Rizki Saputra",
+    "dob": "1993-06-10",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Nur Aisyah",
+    "phones": [
+      {
+        "number": "6282112340009",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000013",
+    "nik": "3172010610930111",
+    "full_name": "M. Rizky Saputra",
+    "dob": "1993-10-06",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Nur Aisah",
+    "phones": [
+      {
+        "number": "6282112340002",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000014",
+    "nik": "3174044909910435",
+    "full_name": "Siti Nurhaliza",
+    "dob": "1991-09-09",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Ahmad Fauzi",
+    "phones": [
+      {
+        "number": "6281511223344",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000015",
+    "nik": "3174044909919196",
+    "full_name": "Siti Nur Haliza",
+    "dob": "1991-09-09",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Achmad Fauzi",
+    "phones": [
+      {
+        "number": "6281511223345",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": [
+      "DUPLICATE_CIF"
+    ]
+  },
+  {
+    "NO_CIF": "8100000016",
+    "nik": "3374010112703258",
+    "full_name": "Dr. Ir. Agus Setiawan, M.T.",
+    "dob": "1970-12-01",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Lestari Wulandari",
+    "phones": [
+      {
+        "number": "6281122334455",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000017",
+    "nik": "3374010112708929",
+    "full_name": "Setiawan Agus",
+    "dob": "1970-12-01",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Wulandari Lestari",
+    "phones": [
+      {
+        "number": "6285622334455",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000018",
+    "nik": "1271010505796874",
+    "full_name": "H. Taufik Hidayat",
+    "dob": "1979-05-05",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Hj. Intan Permata",
+    "phones": [
+      {
+        "number": "6281277665544",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000019",
+    "nik": "3173051403870300",
+    "full_name": "Fajar Nugroho",
+    "dob": "1987-03-14",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Wulan Rahayu",
+    "phones": [
+      {
+        "number": "6285799001122",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000020",
+    "nik": "3173057007890301",
+    "full_name": "Wulan Rahayu",
+    "dob": "1989-07-30",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Fajar Nugroho",
+    "phones": [
+      {
+        "number": "6285799001123",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000021",
+    "nik": "3201010202963612",
+    "full_name": "Dimas Kusuma",
+    "dob": "1996-02-02",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6287711110000",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000022",
+    "nik": "3201010202967360",
+    "full_name": "Dimas Kusumah",
+    "dob": "1996-02-02",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6287711110000",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": [
+      "DUPLICATE_CIF"
+    ]
+  },
+  {
+    "NO_CIF": "8100000023",
+    "nik": "3201014808989655",
+    "full_name": "Ayu Lestari",
+    "dob": "1998-08-08",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6287711110001",
+        "status": "INACTIVE"
+      },
+      {
+        "number": "6281988776655",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000024",
+    "nik": "3578011010824558",
+    "full_name": "Eko Wibowo",
+    "dob": "1982-10-10",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6281355667788",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000025",
+    "nik": "3578015901900107",
+    "full_name": "Indah Permata",
+    "dob": "1990-01-19",
+    "gender": "P",
+    "marital_status": "CERAI",
+    "spouse_name": "Eko Wibowo",
+    "phones": [
+      {
+        "number": "6281355667789",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000026",
+    "nik": "3171020404752616",
+    "full_name": "Joko Susilo",
+    "dob": "1975-04-04",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Mega Utami",
+    "phones": [
+      {
+        "number": "6281244556677",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": [
+      "BLACKLIST"
+    ]
+  },
+  {
+    "NO_CIF": "8100000027",
+    "nik": "3171020404756925",
+    "full_name": "Joko Susila",
+    "dob": "1975-04-04",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Mega Utami",
+    "phones": [
+      {
+        "number": "6281244556678",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000028",
+    "nik": "3171016506685575",
+    "full_name": "Ratna Halim",
+    "dob": "1968-06-25",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Andi Halim",
+    "phones": [
+      {
+        "number": "6281166778899",
+        "status": "INACTIVE"
+      }
+    ],
+    "flags": [
+      "DECEASED"
+    ]
+  },
+  {
+    "NO_CIF": "8100000029",
+    "nik": "3173055202896202",
+    "full_name": "Putri Gunawan",
+    "dob": "1989-02-12",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289545503389",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000030",
+    "nik": "6471010312775978",
+    "full_name": "Wahyu Reza Hakim",
+    "dob": "1977-12-03",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Indah Lestari",
+    "phones": [
+      {
+        "number": "6281341244663",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000031",
+    "nik": "3273022212827574",
+    "full_name": "Yoga Aminah",
+    "dob": "1982-12-22",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289595225343",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000032",
+    "nik": "3578026204003484",
+    "full_name": "Fitri Marlina",
+    "dob": "2000-04-22",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Andi Setiawan",
+    "phones": [
+      {
+        "number": "6281252339391",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000033",
+    "nik": "5171014903943594",
+    "full_name": "Intan Marlina",
+    "dob": "1994-03-09",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Wahyu Firmansyah",
+    "phones": [
+      {
+        "number": "6285788461803",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000034",
+    "nik": "3374012103729065",
+    "full_name": "Taufik Pratama",
+    "dob": "1972-03-21",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Sari Utami",
+    "phones": [
+      {
+        "number": "6281361642594",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000035",
+    "nik": "3374011111828202",
+    "full_name": "Agus Firmansyah",
+    "dob": "1982-11-11",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Sari Hidayat",
+    "phones": [
+      {
+        "number": "6287710435578",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000036",
+    "nik": "3171011711849814",
+    "full_name": "Taufik Marlina",
+    "dob": "1984-11-17",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6282160185867",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000037",
+    "nik": "3174045904682104",
+    "full_name": "Dian Lestari Setiawan",
+    "dob": "1968-04-19",
+    "gender": "P",
+    "marital_status": "CERAI",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6281375228535",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000038",
+    "nik": "6471016312991983",
+    "full_name": "Mega Yuni Kusuma",
+    "dob": "1999-12-23",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Bayu Siregar",
+    "phones": [
+      {
+        "number": "6283897225156",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000039",
+    "nik": "3201010301794563",
+    "full_name": "Joko Hakim",
+    "dob": "1979-01-03",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6281240728046",
+        "status": "ACTIVE"
+      },
+      {
+        "number": "6281254349361",
+        "status": "INACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000040",
+    "nik": "6471015610010888",
+    "full_name": "Nur Wibowo",
+    "dob": "2001-10-16",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Galih Nasution",
+    "phones": [
+      {
+        "number": "6282222660194",
+        "status": "ACTIVE"
+      },
+      {
+        "number": "6287857553014",
+        "status": "INACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000041",
+    "nik": "3172010704717261",
+    "full_name": "Andi Permata",
+    "dob": "1971-04-07",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Anisa Saputra",
+    "phones": [
+      {
+        "number": "6287834627347",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000042",
+    "nik": "1271012502650961",
+    "full_name": "Andi Firmansyah",
+    "dob": "1965-02-25",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6282164547971",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000043",
+    "nik": "3578012307833567",
+    "full_name": "Rahmat Rahmat Simanjuntak",
+    "dob": "1983-07-23",
+    "gender": "L",
+    "marital_status": "CERAI",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289698834863",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000044",
+    "nik": "3172010201853045",
+    "full_name": "Irfan Pratama",
+    "dob": "1985-01-02",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289681286543",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000045",
+    "nik": "3578021904014273",
+    "full_name": "Reza Joko Wijaya",
+    "dob": "2001-04-19",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289521003626",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000046",
+    "nik": "3173051108841201",
+    "full_name": "Arif Aminah",
+    "dob": "1984-08-11",
+    "gender": "L",
+    "marital_status": "CERAI",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6281311250299",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000047",
+    "nik": "3171010605889087",
+    "full_name": "Taufik Setiawan",
+    "dob": "1988-05-06",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Mega Sari",
+    "phones": [
+      {
+        "number": "6285792097999",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000048",
+    "nik": "3578024402813336",
+    "full_name": "Ayu Saputra",
+    "dob": "1981-02-04",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6282146553958",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000049",
+    "nik": "3374015411702648",
+    "full_name": "Yuni Pratama",
+    "dob": "1970-11-14",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6281210475894",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000050",
+    "nik": "7371014302652089",
+    "full_name": "Mega Firmansyah",
+    "dob": "1965-02-03",
+    "gender": "P",
+    "marital_status": "CERAI",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6282183227889",
+        "status": "ACTIVE"
+      },
+      {
+        "number": "6285888183110",
+        "status": "INACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000051",
+    "nik": "3201012204872663",
+    "full_name": "Bayu Pratama",
+    "dob": "1987-04-22",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Ayu Rahayu",
+    "phones": [
+      {
+        "number": "6289664543049",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000052",
+    "nik": "3201010605803270",
+    "full_name": "Ilham Arif Aminah",
+    "dob": "1980-05-06",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6281361343880",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000053",
+    "nik": "3578026201790453",
+    "full_name": "Lestari Setiawan",
+    "dob": "1979-01-22",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Arif Nugroho",
+    "phones": [
+      {
+        "number": "6281347463522",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000054",
+    "nik": "1271011207039447",
+    "full_name": "Eko Wijaya",
+    "dob": "2003-07-12",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6285868571795",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000055",
+    "nik": "3578022411995144",
+    "full_name": "Eko Susanto",
+    "dob": "1999-11-24",
+    "gender": "L",
+    "marital_status": "CERAI",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6283836445607",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000056",
+    "nik": "1271011306912852",
+    "full_name": "Bayu Aminah",
+    "dob": "1991-06-13",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289627084279",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000057",
+    "nik": "3273014705848376",
+    "full_name": "Intan Santoso",
+    "dob": "1984-05-07",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Irfan Utami",
+    "phones": [
+      {
+        "number": "6283853251559",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000058",
+    "nik": "3273016111972415",
+    "full_name": "Maya Lestari",
+    "dob": "1997-11-21",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6281341523529",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000059",
+    "nik": "3201011911912882",
+    "full_name": "Andi Simanjuntak",
+    "dob": "1991-11-19",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Intan Halim",
+    "phones": [
+      {
+        "number": "6287842747037",
+        "status": "ACTIVE"
+      },
+      {
+        "number": "6281224305904",
+        "status": "INACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000060",
+    "nik": "7371016603948977",
+    "full_name": "Dewi Wijaya",
+    "dob": "1994-03-26",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Taufik Firmansyah",
+    "phones": [
+      {
+        "number": "6289552587010",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000061",
+    "nik": "3578016505933842",
+    "full_name": "Maya Halim",
+    "dob": "1993-05-25",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Eko Susanto",
+    "phones": [
+      {
+        "number": "6287794120751",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000062",
+    "nik": "6471014503706813",
+    "full_name": "Ratna Firmansyah",
+    "dob": "1970-03-05",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Dimas Sari",
+    "phones": [
+      {
+        "number": "6282218620650",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000063",
+    "nik": "3578010112026390",
+    "full_name": "Hendra Siregar",
+    "dob": "2002-12-01",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289561053877",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000064",
+    "nik": "1271015604032705",
+    "full_name": "Mega Firmansyah",
+    "dob": "2003-04-16",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Ilham Halim",
+    "phones": [
+      {
+        "number": "6281262191530",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000065",
+    "nik": "6471015907662978",
+    "full_name": "Putri Firmansyah",
+    "dob": "1966-07-19",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6281221267237",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000066",
+    "nik": "3374011106941342",
+    "full_name": "Eko Kusuma",
+    "dob": "1994-06-11",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6287847346970",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000067",
+    "nik": "3201016104872069",
+    "full_name": "Siti Pratama",
+    "dob": "1987-04-21",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Andi Santoso",
+    "phones": [
+      {
+        "number": "6282236757737",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000068",
+    "nik": "3173054912942684",
+    "full_name": "Ayu Kusuma",
+    "dob": "1994-12-09",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6282191321540",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000069",
+    "nik": "3578015311019838",
+    "full_name": "Ayu Lestari",
+    "dob": "2001-11-13",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Hendra Gunawan",
+    "phones": [
+      {
+        "number": "6289594187049",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000070",
+    "nik": "3173052207997103",
+    "full_name": "Irfan Rahayu",
+    "dob": "1999-07-22",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Yuni Marlina",
+    "phones": [
+      {
+        "number": "6285811698142",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000071",
+    "nik": "3671015712767617",
+    "full_name": "Anisa Nasution",
+    "dob": "1976-12-17",
+    "gender": "P",
+    "marital_status": "CERAI",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6285792666356",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000072",
+    "nik": "5171016504934233",
+    "full_name": "Nadia Nugroho",
+    "dob": "1993-04-25",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Reza Aminah",
+    "phones": [
+      {
+        "number": "6287855150390",
+        "status": "ACTIVE"
+      },
+      {
+        "number": "6285834406132",
+        "status": "INACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000073",
+    "nik": "3671014109828042",
+    "full_name": "Fitri Sari",
+    "dob": "1982-09-01",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Hendra Gunawan",
+    "phones": [
+      {
+        "number": "6282264549859",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000074",
+    "nik": "3578026205805765",
+    "full_name": "Siti Indah Sari",
+    "dob": "1980-05-22",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6287784285882",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000075",
+    "nik": "3578014712721648",
+    "full_name": "Fitri Setiawan",
+    "dob": "1972-12-07",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Wahyu Sari",
+    "phones": [
+      {
+        "number": "6282135708194",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000076",
+    "nik": "3173050903990201",
+    "full_name": "Bayu Fajar Santoso",
+    "dob": "1999-03-09",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Dewi Firmansyah",
+    "phones": [
+      {
+        "number": "6285726948946",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000077",
+    "nik": "3172014901769454",
+    "full_name": "Dian Permata",
+    "dob": "1976-01-09",
+    "gender": "P",
+    "marital_status": "CERAI",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6287725312516",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000078",
+    "nik": "1271011802807382",
+    "full_name": "Dimas Irfan Gunawan",
+    "dob": "1980-02-18",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289590010790",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000079",
+    "nik": "3201016010842848",
+    "full_name": "Wulan Nasution",
+    "dob": "1984-10-20",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Agus Kusuma",
+    "phones": [
+      {
+        "number": "6283838323322",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000080",
+    "nik": "3273011004676966",
+    "full_name": "Fajar Dedi Lestari",
+    "dob": "1967-04-10",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6287719553585",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000081",
+    "nik": "6471010601694983",
+    "full_name": "Wahyu Dimas Saputra",
+    "dob": "1969-01-06",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289586397676",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000082",
+    "nik": "3171016002934416",
+    "full_name": "Fitri Halim",
+    "dob": "1993-02-20",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Ilham Wibowo",
+    "phones": [
+      {
+        "number": "6285891029073",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000083",
+    "nik": "3671010605935701",
+    "full_name": "Fajar Marlina",
+    "dob": "1993-05-06",
+    "gender": "L",
+    "marital_status": "CERAI",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6287895199362",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000084",
+    "nik": "3171025406757452",
+    "full_name": "Ratna Wijaya",
+    "dob": "1975-06-14",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6285798930456",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000085",
+    "nik": "6471012811650846",
+    "full_name": "Arif Agus Susanto",
+    "dob": "1965-11-28",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Sari Pratama",
+    "phones": [
+      {
+        "number": "6282279583757",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000086",
+    "nik": "3172011612933682",
+    "full_name": "Eko Lestari",
+    "dob": "1993-12-16",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Citra Setiawan",
+    "phones": [
+      {
+        "number": "6282151708177",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000087",
+    "nik": "1271012308743123",
+    "full_name": "Dedi Marlina",
+    "dob": "1974-08-23",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Fitri Nasution",
+    "phones": [
+      {
+        "number": "6287773380266",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000088",
+    "nik": "3174041001827317",
+    "full_name": "Rizky Ilham Susanto",
+    "dob": "1982-01-10",
+    "gender": "L",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289587835998",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000089",
+    "nik": "7371015108890716",
+    "full_name": "Lestari Firmansyah",
+    "dob": "1989-08-11",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6282286745380",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000090",
+    "nik": "3578026611891645",
+    "full_name": "Dian Siregar",
+    "dob": "1989-11-26",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6282176481885",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000091",
+    "nik": "3172014512655384",
+    "full_name": "Ayu Simanjuntak",
+    "dob": "1965-12-05",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Dimas Gunawan",
+    "phones": [
+      {
+        "number": "6287745570755",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000092",
+    "nik": "3173056001997270",
+    "full_name": "Ratna Halim",
+    "dob": "1999-01-20",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Bayu Setiawan",
+    "phones": [
+      {
+        "number": "6281368246664",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000093",
+    "nik": "3273021001852786",
+    "full_name": "Bayu Pratama",
+    "dob": "1985-01-10",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Sari Saputra",
+    "phones": [
+      {
+        "number": "6282281291936",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000094",
+    "nik": "3171010811047623",
+    "full_name": "Rizky Siregar",
+    "dob": "2004-11-08",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Nadia Saputra",
+    "phones": [
+      {
+        "number": "6282271894493",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000095",
+    "nik": "3671015411841748",
+    "full_name": "Mega Anisa Hakim",
+    "dob": "1984-11-14",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6287750550084",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000096",
+    "nik": "3171021012839936",
+    "full_name": "Rahmat Hakim",
+    "dob": "1983-12-10",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Intan Nugroho",
+    "phones": [
+      {
+        "number": "6281285957706",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000097",
+    "nik": "3174044806031592",
+    "full_name": "Wulan Setiawan",
+    "dob": "2003-06-08",
+    "gender": "P",
+    "marital_status": "BELUM_KAWIN",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6289543638559",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000098",
+    "nik": "5171012406028698",
+    "full_name": "Bayu Pratama",
+    "dob": "2002-06-24",
+    "gender": "L",
+    "marital_status": "KAWIN",
+    "spouse_name": "Wulan Permata",
+    "phones": [
+      {
+        "number": "6287833574011",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000099",
+    "nik": "1271015502869132",
+    "full_name": "Maya Dian Wibowo",
+    "dob": "1986-02-15",
+    "gender": "P",
+    "marital_status": "CERAI",
+    "spouse_name": "",
+    "phones": [
+      {
+        "number": "6282140281491",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  },
+  {
+    "NO_CIF": "8100000100",
+    "nik": "3201014409817725",
+    "full_name": "Rina Santoso",
+    "dob": "1981-09-04",
+    "gender": "P",
+    "marital_status": "KAWIN",
+    "spouse_name": "Eko Hakim",
+    "phones": [
+      {
+        "number": "6287895704631",
+        "status": "ACTIVE"
+      }
+    ],
+    "flags": []
+  }
+]

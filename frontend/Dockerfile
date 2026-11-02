@@ -1,7 +1,8 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+# No package-lock.json in repo; npm ci would fail here.
+RUN npm install
 COPY . .
 RUN npm run build
 

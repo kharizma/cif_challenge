@@ -1,1 +1,5 @@
 Dockerfile
+.dockerignore
+.env
+uploads
+AGENTS.md

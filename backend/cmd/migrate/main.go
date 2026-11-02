@@ -32,10 +32,8 @@ func main() {
 		usage()
 	}
 
-	cfg, err := config.Load(*envPath)
-	if err != nil {
-		fail(err)
-	}
+	// Optional file: containers pass DB settings as env vars, no .env mounted.
+	cfg := config.LoadOptional(*envPath)
 	if driver := cfg.Get("DB_DRIVER", "postgres"); driver != "postgres" {
 		fail(fmt.Errorf("unsupported DB_DRIVER %q", driver))
 	}
