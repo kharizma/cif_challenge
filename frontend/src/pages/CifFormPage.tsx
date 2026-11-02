@@ -13,7 +13,6 @@ import {
   documentRecords,
   formatDate,
   formatRupiah,
-  maskNik,
 } from '../lib/cif';
 import { DOC_STATUS_STYLES, computeDocumentStatus } from '../lib/docStore';
 import { apiErrorMessage, checkCif, fetchCifList } from '../services/api';
@@ -102,8 +101,14 @@ export default function CifFormPage() {
     setFormError(null);
     try {
       const check = await checkCif(values);
-      setModal(null);
-      setResult(check);
+      // REFER dan PASS boleh upload dokumen; hanya NOT PASS yang tidak punya form upload.
+      if (check.status !== 'NOT PASS') {
+        setResult(null);
+        setModal({ type: 'documents', customer: check.customer });
+      } else {
+        setModal(null);
+        setResult(check);
+      }
       setToast(`Pengajuan ${check.customer.applicationId ?? ''} ${check.status}.`);
       await load(1);
     } catch (error) {
@@ -213,7 +218,7 @@ export default function CifFormPage() {
                 {filtered.map((customer) => (
                   <tr key={customer.id} className="transition-colors hover:bg-neutral-50">
                     <td className="whitespace-nowrap px-2.5 py-3 font-mono text-xs text-neutral-700">
-                      {customer.nik ? maskNik(customer.nik) : '-'}
+                      {customer.nik ? customer.nik : '-'}
                     </td>
                     <td className="whitespace-nowrap px-2.5 py-3 text-neutral-600">
                       {customer.phone || '-'}
@@ -261,14 +266,16 @@ export default function CifFormPage() {
                     </td>
                     <td className="whitespace-nowrap px-2.5 py-3">
                       <div className="flex justify-end gap-1">
-                        <button
-                          type="button"
-                          onClick={() => setModal({ type: 'documents', customer })}
-                          aria-label={`Dokumen ${customer.fullName}`}
-                          className="grid h-8 w-8 place-items-center rounded-lg text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
-                        >
-                          <FileUp size={15} />
-                        </button>
+                        {(customer.status === 'REFER' || customer.status === 'PASS') && (
+                          <button
+                            type="button"
+                            onClick={() => setModal({ type: 'documents', customer })}
+                            aria-label={`Upload dokumen ${customer.fullName}`}
+                            className="grid h-8 w-8 place-items-center rounded-lg text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
+                          >
+                            <FileUp size={15} />
+                          </button>
+                        )}
                         <button
                           type="button"
                           onClick={() => setModal({ type: 'view', customer })}
@@ -335,14 +342,7 @@ export default function CifFormPage() {
         />
       )}
       {result && (
-        <CifResultModal
-          result={result}
-          onClose={() => setResult(null)}
-          onUpload={() => {
-            setModal({ type: 'documents', customer: result.customer });
-            setResult(null);
-          }}
-        />
+        <CifResultModal result={result} onClose={() => setResult(null)} />
       )}
       {toast && <Toast message={toast} onClose={() => setToast(null)} />}
     </>

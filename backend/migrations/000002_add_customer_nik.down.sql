@@ -1,0 +1,6 @@
+BEGIN;
+
+ALTER TABLE customer DROP CONSTRAINT IF EXISTS customer_nik_format;
+ALTER TABLE customer DROP COLUMN IF EXISTS nik;
+
+COMMIT;

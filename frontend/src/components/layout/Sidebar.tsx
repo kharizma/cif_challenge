@@ -1,9 +1,8 @@
-import { FileStack, LayoutDashboard } from 'lucide-react';
+import { FileStack } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import type { NavItem } from '../../types';
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Dashboard', to: '/dashboard', icon: LayoutDashboard },
   { label: 'CIF Form', to: '/cif-form', icon: FileStack },
 ];
 

@@ -56,6 +56,8 @@ export interface Customer {
   birthDate: string;
   phone: string;
   maritalStatus: MaritalStatus;
+  spouseName: string;
+  spouseForgotten: boolean;
   creditType: CreditType;
   loanAmount: number;
   tenor: Tenor;
@@ -76,6 +78,8 @@ export type CustomerFormValues = {
   birthDate: string;
   phone: string;
   maritalStatus: MaritalStatus | '';
+  spouseName: string;
+  spouseForgotten: boolean;
   creditType: CreditType | '';
   loanAmount: string;
   tenor: Tenor | '';

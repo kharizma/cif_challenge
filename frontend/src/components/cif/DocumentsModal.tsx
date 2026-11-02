@@ -2,6 +2,7 @@ import { Eye, FileText, Loader2, RefreshCw, Upload, X } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import Modal from '../ui/Modal';
+import CifSummary from './CifSummary';
 import {
   ACCEPTED_MIME,
   ACCEPT_ATTR,
@@ -233,9 +234,10 @@ export default function DocumentsModal({ customer, records, onClose }: Documents
 
   return (
     <Modal
-      title={`Dokumen ${customer.fullName}`}
-      description="Unggah dokumen pendukung. JPG, PNG, atau PDF."
+      title="Hasil Pengajuan"
+      description={customer.applicationId ?? '-'}
       onClose={requestClose}
+      size="md"
       footer={
         <div className="flex items-center justify-between gap-3">
           <p className="text-xs text-neutral-500">
@@ -257,11 +259,14 @@ export default function DocumentsModal({ customer, records, onClose }: Documents
       }
     >
       <div className="space-y-5">
-        {customer.status === 'REFER' && uploadedCount === 0 && (
-          <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">
-            Status REFER wajib upload dokumen.
+        <CifSummary customer={customer} />
+
+        <div className="border-t border-neutral-200 pt-4">
+          <h3 className="text-sm font-semibold text-neutral-900">Upload Dokumen</h3>
+          <p className="mt-0.5 text-xs text-neutral-500">
+            {customer.status === 'PASS' ? 'Dokumen opsional untuk status PASS.' : 'JPG, PNG, atau PDF.'}
           </p>
-        )}
+        </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <div className="sm:w-44">

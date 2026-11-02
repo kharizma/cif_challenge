@@ -15,6 +15,8 @@ export const EMPTY_FORM: CustomerFormValues = {
   birthDate: '',
   phone: '',
   maritalStatus: '',
+  spouseName: '',
+  spouseForgotten: false,
   creditType: '',
   loanAmount: '',
   tenor: '',
@@ -23,6 +25,8 @@ export const EMPTY_FORM: CustomerFormValues = {
 const NAME_PATTERN = /^[A-Za-z .,'-]+$/;
 const NIK_PATTERN = /^\d{16}$/;
 const PHONE_PATTERN = /^(?:\+628|628|08)\d{8,11}$/;
+// Spaces and hyphens are allowed in the input, so drop them like the backend does.
+const PHONE_STRIP = /[ -]/g;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
 export function validateCustomer(values: CustomerFormValues): CustomerFormErrors {
@@ -58,11 +62,22 @@ export function validateCustomer(values: CustomerFormValues): CustomerFormErrors
     }
   }
 
-  if (values.phone.length > 0 && !PHONE_PATTERN.test(values.phone)) {
+  if (values.phone.length > 0 && !PHONE_PATTERN.test(values.phone.replace(PHONE_STRIP, ''))) {
     errors.phone = 'Nomor harus diawali 08, 628, atau +628, lalu 8-11 digit.';
   }
 
   if (values.maritalStatus === '') errors.maritalStatus = 'Pilih status perkawinan.';
+  const spouse = values.spouseName.trim();
+  if (values.maritalStatus !== 'KAWIN') {
+    if (spouse !== '') errors.spouseName = 'Nama pasangan hanya boleh diisi jika status KAWIN.';
+  } else if (!values.spouseForgotten && spouse !== '') {
+    // Max 50 follows the spouse_name varchar(50) column.
+    if (spouse.length < 3 || spouse.length > 50) {
+      errors.spouseName = 'Nama pasangan harus 3-50 karakter.';
+    } else if (!NAME_PATTERN.test(spouse)) {
+      errors.spouseName = 'Hanya huruf, spasi, titik, koma, apostrof, dan tanda hubung.';
+    }
+  }
   if (values.creditType === '') errors.creditType = 'Pilih jenis kredit.';
 
   if (values.loanAmount.trim().length === 0) {
@@ -88,6 +103,13 @@ export function hasErrors(errors: CustomerFormErrors): boolean {
 export function maskNik(nik: string): string {
   if (nik.length <= 5) return nik;
   return `${nik.slice(0, 3)}${'X'.repeat(nik.length - 5)}${nik.slice(-2)}`;
+}
+
+// Formats digit-only input with thousand separators; keep the raw digits for the request.
+export function formatAmount(digits: string): string {
+  const value = digits.replace(/\D/g, '');
+  if (value === '') return '';
+  return new Intl.NumberFormat('en-US').format(Number(value));
 }
 
 export function formatRupiah(value: number): string {

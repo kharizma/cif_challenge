@@ -8,6 +8,7 @@ type Customer struct {
 	ID                 string     `gorm:"column:id;type:uuid;default:gen_random_uuid();primaryKey" json:"id"`
 	ApplicationID      *string    `gorm:"column:application_id" json:"application_id,omitempty"`
 	FullName           string     `gorm:"column:full_name" json:"full_name"`
+	NIK                *string    `gorm:"column:nik" json:"nik,omitempty"`
 	DOB                time.Time  `gorm:"column:dob;type:date" json:"dob"`
 	Phone              *string    `gorm:"column:phone" json:"phone,omitempty"`
 	MaritalStatus      string     `gorm:"column:marital_status" json:"marital_status"`

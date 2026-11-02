@@ -6,6 +6,7 @@ import Modal from '../ui/Modal';
 import {
   EMPTY_FORM,
   creditTypeOptions,
+  formatAmount,
   hasErrors,
   maritalStatusOptions,
   tenorOptions,
@@ -29,6 +30,8 @@ function toFormValues(customer: Customer | null): CustomerFormValues {
     birthDate: customer.birthDate,
     phone: customer.phone,
     maritalStatus: customer.maritalStatus,
+    spouseName: customer.spouseName,
+    spouseForgotten: customer.spouseForgotten,
     creditType: customer.creditType,
     loanAmount: String(customer.loanAmount),
     tenor: customer.tenor,
@@ -48,6 +51,19 @@ export default function CustomerFormModal({
 
   const update = <K extends keyof CustomerFormValues>(key: K, value: CustomerFormValues[K]) => {
     const next = { ...values, [key]: value };
+    setValues(next);
+    if (submitted) setErrors(validateCustomer(next));
+  };
+
+  // Spouse data only exists for KAWIN, so leaving it clears both fields.
+  const changeMaritalStatus = (value: CustomerFormValues['maritalStatus']) => {
+    const next = { ...values, maritalStatus: value, spouseName: '', spouseForgotten: false };
+    setValues(next);
+    if (submitted) setErrors(validateCustomer(next));
+  };
+
+  const toggleSpouseForgotten = (checked: boolean) => {
+    const next = { ...values, spouseForgotten: checked, spouseName: checked ? '' : values.spouseName };
     setValues(next);
     if (submitted) setErrors(validateCustomer(next));
   };
@@ -150,10 +166,10 @@ export default function CustomerFormModal({
               id="phone"
               type="tel"
               value={values.phone}
-              onChange={(event) => update('phone', event.target.value.trim())}
+              onChange={(event) => update('phone', event.target.value)}
               aria-invalid={Boolean(errors.phone)}
               aria-describedby={errors.phone ? 'phone-error' : undefined}
-              placeholder="08xxxxxxxxxx"
+              placeholder="08xx xxxx xxxx"
               className={inputClass(Boolean(errors.phone))}
             />
           </Field>
@@ -169,7 +185,7 @@ export default function CustomerFormModal({
                 id="maritalStatus"
                 value={values.maritalStatus}
                 onChange={(event) =>
-                  update('maritalStatus', event.target.value as CustomerFormValues['maritalStatus'])
+                  changeMaritalStatus(event.target.value as CustomerFormValues['maritalStatus'])
                 }
                 aria-invalid={Boolean(errors.maritalStatus)}
                 aria-describedby={errors.maritalStatus ? 'maritalStatus-error' : undefined}
@@ -183,6 +199,31 @@ export default function CustomerFormModal({
                 ))}
               </select>
             </Field>
+            {values.maritalStatus === 'KAWIN' && (
+              <div>
+                <Field id="spouseName" label="Nama Suami/Istri" error={errors.spouseName}>
+                  <input
+                    id="spouseName"
+                    value={values.spouseName}
+                    onChange={(event) => update('spouseName', event.target.value)}
+                    disabled={values.spouseForgotten}
+                    aria-invalid={Boolean(errors.spouseName)}
+                    aria-describedby={errors.spouseName ? 'spouseName-error' : undefined}
+                    placeholder="Nama pasangan sesuai KTP"
+                    className={inputClass(Boolean(errors.spouseName))}
+                  />
+                </Field>
+                <label className="mt-2 inline-flex items-center gap-2 text-sm text-neutral-700">
+                  <input
+                    type="checkbox"
+                    checked={values.spouseForgotten}
+                    onChange={(event) => toggleSpouseForgotten(event.target.checked)}
+                    className="h-4 w-4 rounded border-neutral-300 text-accent focus:ring-accent"
+                  />
+                  Saya lupa nama pasangan
+                </label>
+              </div>
+            )}
             <Field id="creditType" label="Jenis Kredit" required error={errors.creditType}>
               <select
                 id="creditType"
@@ -205,15 +246,15 @@ export default function CustomerFormModal({
             <Field id="loanAmount" label="Jumlah Pinjaman" required error={errors.loanAmount}>
               <input
                 id="loanAmount"
-                type="number"
-                min={5_000_000}
-                max={500_000_000}
-                step={1}
-                value={values.loanAmount}
-                onChange={(event) => update('loanAmount', event.target.value)}
+                type="text"
+                inputMode="numeric"
+                value={formatAmount(values.loanAmount)}
+                onChange={(event) =>
+                  update('loanAmount', event.target.value.replace(/\D/g, '').replace(/^0+/, ''))
+                }
                 aria-invalid={Boolean(errors.loanAmount)}
                 aria-describedby={errors.loanAmount ? 'loanAmount-error' : undefined}
-                placeholder="5000000 - 500000000"
+                placeholder="5,000,000 - 500,000,000"
                 className={inputClass(Boolean(errors.loanAmount))}
               />
             </Field>

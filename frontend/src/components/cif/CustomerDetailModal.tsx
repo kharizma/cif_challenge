@@ -1,4 +1,4 @@
-import { formatDate, formatRupiah, maskNik } from '../../lib/cif';
+import { formatDate, formatRupiah } from '../../lib/cif';
 import type { ReactNode } from 'react';
 import type { Customer } from '../../types';
 import Modal from '../ui/Modal';
@@ -28,7 +28,7 @@ export default function CustomerDetailModal({ customer, onClose }: { customer: C
         <Section title="Personal Information">
           <Row label="Application ID" value={customer.applicationId ?? '-'} />
           <Row label="Nama Lengkap" value={customer.fullName} />
-          <Row label="NIK" value={customer.nik ? maskNik(customer.nik) : '-'} />
+          <Row label="NIK" value={customer.nik ? customer.nik : '-'} />
           <Row label="Tanggal Lahir" value={customer.birthDate} />
         </Section>
         <Section title="Contact Information">
@@ -36,6 +36,16 @@ export default function CustomerDetailModal({ customer, onClose }: { customer: C
         </Section>
         <Section title="Additional Information">
           <Row label="Status Perkawinan" value={customer.maritalStatus} />
+          <Row
+            label="Nama Suami/Istri"
+            value={
+              customer.maritalStatus !== 'KAWIN'
+                ? '-'
+                : customer.spouseForgotten
+                  ? 'Lupa nama pasangan'
+                  : customer.spouseName || '-'
+            }
+          />
           <Row label="Jenis Kredit" value={customer.creditType} />
           <Row label="Jumlah Pinjaman" value={formatRupiah(customer.loanAmount)} />
           <Row label="Tenor" value={`${customer.tenor} bulan`} />

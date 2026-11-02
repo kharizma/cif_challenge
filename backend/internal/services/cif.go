@@ -140,8 +140,9 @@ func (s *CifService) Check(ctx context.Context, in CheckInput) (*models.Customer
 		return nil, nil, err
 	}
 
+	nik := NormalizeNIK(in.NIK)
 	input := MatchInput{
-		NIK:        NormalizeNIK(in.NIK),
+		NIK:        nik,
 		FullName:   in.FullName,
 		DOB:        in.DOB,
 		Phone:      in.Phone,
@@ -181,6 +182,7 @@ func (s *CifService) Check(ctx context.Context, in CheckInput) (*models.Customer
 	dob, _ := time.Parse("2006-01-02", strings.TrimSpace(in.DOB))
 	customer := &models.Customer{
 		FullName:           strings.TrimSpace(in.FullName),
+		NIK:                &nik,
 		DOB:                dob,
 		MaritalStatus:      in.MaritalStatus,
 		SpouseForgotten:    in.SpouseForgotten,
